@@ -96,9 +96,9 @@ export function useRouteSearch(query: string) {
 
 export function useRouteStops(
   route: string | null,
-  operator: "KMB" | "CTB" | null,
+  operator: "KMB" | "CTB" | "LWB" | null,
   bound: string = "O"
-) {
+)
   const key =
     route && operator
       ? `/api/routes?detail=true&route=${encodeURIComponent(route)}&operator=${operator}&bound=${bound}`
