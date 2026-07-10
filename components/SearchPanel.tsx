@@ -105,11 +105,14 @@ export default function SearchPanel({
   const { etas, isLoading: etaLoading, isValidating, error: etaError, refresh: refreshETA, timestamp } = useETA(selectedStop);
   const { routes: searchedRoutes, isLoading: routesLoading } = useRouteSearch(routeQuery);
   const [selectedRoute, setSelectedRoute] = useState<BusRoute | null>(null);
-  const { stopSeqs } = useRouteStops(
-    selectedRoute?.route || null,
-    selectedRoute?.operator || null,
-    selectedRoute?.bound || "O"
-  );
+  const operatorForStops =
+  selectedRoute?.operator === "LWB" ? "KMB" : selectedRoute?.operator || null;
+
+const { stopSeqs } = useRouteStops(
+  selectedRoute?.route || null,
+  operatorForStops,
+  selectedRoute?.bound || "O"
+);
 
   // Countdown timer for auto refresh
   useEffect(() => {
